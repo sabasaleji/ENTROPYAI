@@ -8,21 +8,21 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   return (
-    <div className="glass-card p-8 rounded-2xl hover:border-entropy-300 transition-all duration-300 group h-full flex flex-col bg-white shadow-sm hover:shadow-md">
-      <div className="w-14 h-14 rounded-lg bg-entropy-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-entropy-200">
-        <service.icon className="w-7 h-7 text-entropy-600" />
+    <div className="glass-card service-card p-8 rounded-2xl h-full flex flex-col">
+      <div className="w-14 h-14 rounded-lg flex items-center justify-center mb-6 transition-transform duration-300" style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}>
+        <service.icon className="w-7 h-7" style={{ color: 'var(--bg-primary)' }} />
       </div>
-      
-      <h3 className="text-2xl font-bold text-slate-900 mb-3">{service.title}</h3>
-      <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
+
+      <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>{service.title}</h3>
+      <p className="mb-6 leading-relaxed flex-grow" style={{ color: 'var(--text-secondary)' }}>
         {service.description}
       </p>
 
       <div className="space-y-3 mt-auto">
         {service.details.map((detail, idx) => (
           <div key={idx} className="flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-entropy-500 flex-shrink-0 mt-0.5" />
-            <span className="text-sm text-slate-600">{detail.title}</span>
+            <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--accent-primary)' }} />
+            <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{detail.title}</span>
           </div>
         ))}
       </div>
