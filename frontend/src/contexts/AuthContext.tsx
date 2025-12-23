@@ -44,7 +44,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
-    
+
     if (storedLoginStatus === 'true' && storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
@@ -61,14 +61,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<AuthResponse> => {
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         setUser(data.user);
         setIsLoggedIn(true);
@@ -85,14 +85,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const register = async (email: string, password: string, name?: string): Promise<AuthResponse> => {
     try {
-      const response = await fetch('http://localhost:5000/api/register', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, name })
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         setUser(data.user);
         setIsLoggedIn(true);
@@ -109,14 +109,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const googleSignIn = async (email: string, name: string, googleId: string): Promise<AuthResponse> => {
     try {
-      const response = await fetch('http://localhost:5000/api/google-signin', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/google-signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name, googleId })
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         setUser(data.user);
         setIsLoggedIn(true);
